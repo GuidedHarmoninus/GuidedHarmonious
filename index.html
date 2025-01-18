@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导和网测试</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-image: url('background.webp');
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+        }
+        .centered-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            animation: fadeInOut 4s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .content {
+            display: none;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .bookmark {
+            display: none;
+        }
+        .toc {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .toc-button {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 50px;
+            height: 50px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .centered-text {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="centered-text">导和文章先遣</div>
+    <div id="content1" class="content">
+        <h1 id="bookmark1">导和网第三次测试01</h1>
+        <p>以下为测试内容</p>
+    </div>
+    <div id="content2" class="content">
+        <h1 id="bookmark2">导和网第三次测试02</h1>
+        <p>以下为测试内容</p>
+    </div>
+    <div class="toc" id="toc">
+        <ul>
+            <li onclick="scrollToElement('bookmark1')">导和网第三次测试01</li>
+            <li onclick="scrollToElement('bookmark2')">导和网第三次测试02</li>
+        </ul>
+    </div>
+    <div class="toc-button" onclick="toggleTOC()">目录</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelector('.centered-text').style.animation = 'none';
+                document.querySelector('.centered-text').style.display = 'none';
+                document.querySelectorAll('.content').forEach(function(content) {
+                    content.style.display = 'block';
+                    content.style.opacity = 0;
+                    setTimeout(function() {
+                        content.style.opacity = 1;
+                    }, 500);
+                });
+                window.scrollTo(0, 0);
+            }, 2000);
+        });
+
+        function scrollToElement(elementId) {
+            const element = document.getElementById(elementId);
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.style.display = toc.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
